@@ -1,27 +1,47 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, switchMap } from 'rxjs';
-import { AuthService } from './auth.service';
+import { map, Observable } from 'rxjs';
 import { Sportler } from '../app/model/sportler.model';
-import { CookieService } from './cookie.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SportlerService {
-  private apiUrl = 'http://localhost:8080/api/sportler';
+  private apiUrl = 'http://localhost:9090/api/sportler';
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
-  
-  getSportler(): Observable<Sportler[]> {
-    console.log("hasd")
-    const token = this.cookieService.getCookie('accessToken');
+  constructor(private http: HttpClient) {}
+
+  // Method to get the Sportler data with authentication
+  getSportler(): Observable<any> {
+    const token = window.sessionStorage.getItem('access_token'); // Retrieve token from AuthService
     if (!token) {
-      throw new Error('Token is not available');
+      throw new Error('No token found');
     }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ` +  token);
-    const sportler =  this.http.get<Sportler[]>(this.apiUrl, { headers });
-    console.log("allah", sportler)
-    return sportler
+
+    // Set headers with Authorization token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    // Make the HTTP GET request
+    return this.http.get(this.apiUrl, { headers });
+  }
+
+  getSportlerByUsername(username: string): Observable<Sportler | null> {
+    const token = window.sessionStorage.getItem('access_token');
+    if (!token) {
+      throw new Error('No token found');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<Sportler[]>(this.apiUrl, { headers }).pipe(
+      map((sportlerList) => {
+        const found = sportlerList.find((s) => s.username === username);
+        return found === undefined ? null : found;
+      })
+    );
   }
 }

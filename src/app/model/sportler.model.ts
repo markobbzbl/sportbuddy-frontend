@@ -5,7 +5,7 @@ export interface Sportler {
     lastname: string;
     email: string;
     ort: string;
-    verfügbarkeit: string;
+    verfuegbarkeit: string;
     sportartenIds: number[];
     kategorieIds: number[];
   }

@@ -1,0 +1,8 @@
+ <mat-form-field appearance="outline" class="filter-input">
+    <mat-label>Suche</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Name, Ort, Email ..."
+    />
+  </mat-form-field>

@@ -1,0 +1,53 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3f51b5;
+  padding: 16px 32px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  width: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  font-size: 2rem;
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-links a {
+  color: white;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.nav-links a.active-link {
+  font-weight: 700;
+  border-bottom: 2px solid white;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.user-icon {
+  font-size: 2.4rem;
+  cursor: pointer;
+}
+

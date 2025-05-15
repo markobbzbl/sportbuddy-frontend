@@ -1,25 +1,40 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, switchMap } from 'rxjs';
-import { AuthService } from './auth.service';
-import { Sportler } from '../app/model/sportler.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CookieService {
-  getCookie(name: string): string | null {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) {
-      return parts.pop()?.split(';').shift() ?? null;
-    }
-    return null;
+  constructor(private http: HttpClient, private router: Router) {}
+
+  getCookie() {
+    const token = window.sessionStorage.getItem('access_token');
+    return token;
   }
 
-  setToken(name: string, value: string, hours: number = 1): void {
-    const expires = new Date(Date.now() + hours * 60 * 60 * 1000).toUTCString(); // 1 Stunde = 3600000 ms
-    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+  reset(redirect_uri: any) {
+    this.router.navigate(redirect_uri)
   }
-  
+
+  getUsername() {
+    const token = window.sessionStorage.getItem('access_token');
+    if (!token) return null;
+
+    try {
+      // JWT Token hat 3 Teile, durch Punkte getrennt: header.payload.signature
+      const payloadBase64 = token.split('.')[1];
+      if (!payloadBase64) return null;
+
+      // Base64Url Decodierung (JWT verwendet Base64Url, also ersetze ggf. Zeichen)
+      const payloadJson = atob(
+        payloadBase64.replace(/-/g, '+').replace(/_/g, '/')
+      );
+      const payload = JSON.parse(payloadJson);
+      console.log(payload.preferred_username);
+      return payload.preferred_username ?? null;
+    } catch (e) {
+      return null;
+    }
+  }
 }
