@@ -4,14 +4,16 @@ import { SportlerService } from '../../service/sportler.service';
 import { Sportler } from '../model/sportler.model';
 import { CookieService } from '../../service/cookie.service';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    HeaderComponent
+]
 })
 export class ProfileComponent implements OnInit {
   sportler: Sportler | null = null;

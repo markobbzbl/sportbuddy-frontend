@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -27,7 +32,6 @@ import { Sportler } from '../model/sportler.model';
   styleUrl: './searchbar.component.scss',
 })
 export class SearchbarComponent {
-
   sportlerList: Sportler[] = [];
   loginForm: FormGroup;
   errorMessage: string = '';
@@ -54,26 +58,10 @@ export class SearchbarComponent {
       password: ['', Validators.required],
     });
   }
-  
-    ngOnInit(): void {
-    const token = window.sessionStorage.getItem('access_token');
 
-    if (token) {
-      this.sportlerService.getSportler().subscribe(
-        (data) => {
-          console.log('Sportler data received', data);
-          this.sportlerList = data;
-          this.dataSource = new MatTableDataSource(this.sportlerList);
-        },
-        (error) => {
-          console.error('Error fetching sportler data', error); // Handle any errors
-        }
-      );
-    } else {
-      this.router.navigate(['login']);
-    }
+  ngOnInit(): void {
+
   }
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

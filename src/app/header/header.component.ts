@@ -6,7 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AppLoginComponent } from "../app-login/app-login.component";
 
 @Component({
   selector: 'app-header',
@@ -19,8 +24,26 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     MatIconModule,
     RouterModule,
-  ],
+    MatDialogModule,
+    MatMenuModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    AppLoginComponent
+],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  constructor(private router: Router){
+
+  }
+
+  logout() {
+    window.sessionStorage.clear()
+    window.location.href = "http://localhost:8080/realms/sportbuddy/protocol/openid-connect/logout?redirect_uri=http://localhost:4200";
+  }
+
+  loadContactPage(){
+    this.router.navigate(["/contact"])
+  }
+}

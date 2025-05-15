@@ -1,7 +1,8 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { SportlerOverviewComponent } from './sportler-overview/sportler-overview.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ContactComponent } from './contact/contact.component';
+import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
     {
@@ -22,3 +23,10 @@ export const routes: Routes = [
         component: ContactComponent
     }
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {
+}

@@ -5,20 +5,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import {
-  MatTableDataSource,
-  MatTableModule,
-} from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import { MatIconButton } from '@angular/material/button';
-import { SearchbarComponent } from "../searchbar/searchbar.component";
+import { MatIconModule } from '@angular/material/icon';
+import { SearchbarComponent } from '../searchbar/searchbar.component';
 import { CookieService } from '../../service/cookie.service';
-import { HeaderComponent } from "../header/header.component";
+import { HeaderComponent } from '../header/header.component';
+import { ContactComponent } from '../contact/contact.component';
 @Component({
   selector: 'app-sportler-overview',
   imports: [
@@ -31,12 +28,12 @@ import { HeaderComponent } from "../header/header.component";
     MatIconModule,
     RouterModule,
     SearchbarComponent,
-    HeaderComponent 
-],
+    HeaderComponent,
+  ],
   templateUrl: './sportler-overview.component.html',
   styleUrl: './sportler-overview.component.scss',
 })
-export class SportlerOverviewComponent implements OnInit, AfterViewInit {
+export class SportlerOverviewComponent{
   sportlerList: Sportler[] = [];
   loginForm: FormGroup;
   errorMessage: string = '';
@@ -49,14 +46,12 @@ export class SportlerOverviewComponent implements OnInit, AfterViewInit {
     'verfuegbarkeit',
   ];
   dataSource = new MatTableDataSource<Sportler>();
-
+  i: number = 1;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
-    private cookieService: CookieService,
     private sportlerService: SportlerService
   ) {
     this.loginForm = this.fb.group({
@@ -65,37 +60,33 @@ export class SportlerOverviewComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit(): void {
-  const token = window.sessionStorage.getItem('access_token');
+  loadData(){
+    
+    const token = window.sessionStorage.getItem('access_token');
 
-  if (token) {
-    this.sportlerService.getSportler().subscribe(
-      (data) => {
-        console.log('Sportler data received', data);
-        this.sportlerList = data;
-        this.dataSource = new MatTableDataSource(this.sportlerList);
-      },
-      (error) => {
-        // Assuming the 401 error is from unauthenticated access, redirect to login
-        if (error.status === 401) {
-          window.sessionStorage.removeItem('access_token')
-          const loginUrl = `http://localhost:8080/realms/sportbuddy/protocol/openid-connect/auth?response_type=code&client_id=sportbuddy&redirect_uri=http://localhost:4200`;
-          window.location.href = loginUrl; // redirect the user to login
-        } else {
+    if (token) {
+      this.sportlerService.getSportler().subscribe(
+        (data) => {
+          console.log('Sportler data received', data);
+          this.sportlerList = data;
+          this.dataSource = new MatTableDataSource(this.sportlerList);
+        },
+        (error) => {
           console.error('Error fetching sportler data', error);
+
         }
-      }
-    );
-  } else {
-    // If there's no token, redirect to login page
-    this.router.navigate(['login']);
+      );
+    }
+
   }
-}
 
-
-  ngAfterViewInit() {
-    this.dataSource!.paginator = this.paginator;
-    this.dataSource!.sort = this.sort;
+  redirectToLogin(): void {
+    const keycloakLoginUrl =
+      'http://localhost:8080/realms/sportbuddy/protocol/openid-connect/auth' +
+      '?response_type=code' +
+      '&client_id=sportbuddy' +
+      '&redirect_uri=http://localhost:4200';
+    window.location.href = keycloakLoginUrl;
   }
 
   applyFilter(event: Event) {

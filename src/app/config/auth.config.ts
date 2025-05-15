@@ -7,5 +7,5 @@ export const authConfig: AuthConfig = {
   responseType: 'code',
   scope: 'openid profile email',
   showDebugInformation: true,
-  requireHttps: false, // nur für Entwicklung!
+  requireHttps: false, // nur für Entwicklung
 };

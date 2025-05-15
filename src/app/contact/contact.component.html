@@ -1,0 +1,45 @@
+<app-header></app-header>
+<div class="contact-container">
+  <div class="header-section">
+    <h2>Kontaktformular</h2>
+  </div>
+
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="submitted && contactForm.get('name')?.invalid">Name ist erforderlich</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error *ngIf="submitted && contactForm.get('email')?.invalid">Gültige E-Mail ist erforderlich</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Betreff</mat-label>
+      <input matInput formControlName="subject" />
+      <mat-error *ngIf="submitted && contactForm.get('subject')?.invalid">Betreff ist erforderlich</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Nachricht</mat-label>
+      <textarea matInput rows="5" formControlName="message"></textarea>
+      <mat-error *ngIf="submitted && contactForm.get('message')?.invalid">Nachricht ist erforderlich</mat-error>
+    </mat-form-field>
+
+    <div class="button-wrapper">
+      <button
+        mat-raised-button
+        matTooltip="Test"
+        color="primary"
+        type="submit"
+        [disabled]="contactForm.invalid"
+      >
+        Absenden
+      </button>
+    </div>
+  </form>
+</div>
+

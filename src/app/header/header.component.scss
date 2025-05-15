@@ -6,48 +6,52 @@
   padding: 16px 32px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: white;
-  font-family: 'Roboto', sans-serif;
-  width: auto;
+  font-family: "Roboto", sans-serif;
+  overflow-x: visible; /* wichtig */
+  flex-wrap: nowrap; /* verhindert umbrechen */
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.logo-icon {
-  font-size: 2rem;
-}
-
-.logo-text {
-  font-size: 1.8rem;
-  font-weight: 600;
+  max-width: 40%; /* damit es nicht zu breit wird */
+  white-space: nowrap; /* verhindert Umbruch des Logos */
+  overflow: visible; /* verhindert Abschneiden */
 }
 
 .nav-links {
   display: flex;
   gap: 16px;
-}
-
-.nav-links a {
-  color: white;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.nav-links a.active-link {
-  font-weight: 700;
-  border-bottom: 2px solid white;
+  flex-grow: 1; /* nimmt den restlichen Platz ein */
+  justify-content: center; /* optional, um die Links mittig zu halten */
+  overflow: visible;
 }
 
 .user-profile {
   display: flex;
   align-items: center;
+  gap: 8px; /* spacing between icons */
 }
 
-.user-icon {
-  font-size: 2.4rem;
+.logout-profile {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 12px;
+}
+
+.logout-icon {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+a {
+  color: white;
+  font-style: none;
+}
+
+mat-icon:hover {
   cursor: pointer;
-}
 
+}
