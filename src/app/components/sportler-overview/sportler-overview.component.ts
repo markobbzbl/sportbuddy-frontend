@@ -19,6 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { AppAuthService } from '../../service/app.auth.service';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { CreateDialogComponent } from '../../create-dialog/create-dialog.component';
 @Component({
   selector: 'app-sportler-overview',
   imports: [
@@ -114,28 +115,26 @@ export class SportlerOverviewComponent implements OnInit {
     this.dataSource!.filter = filterValue.trim().toLowerCase();
   }
 
- deleteSportler(sportler: Sportler): void {
-  const dialogRef = this.dialog.open(DeleteDialogComponent, {
-    width: '350px',
-    data: { message: 'Möchtest du diesen Sportler wirklich löschen?' },
-  });
+  deleteSportler(sportler: Sportler): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '350px',
+      data: { message: 'Möchtest du diesen Sportler wirklich löschen?' },
+    });
 
-  dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-    if (confirmed) {
-      this.sportlerService.deleteSportler(sportler.id).subscribe({
-        next: () => {
-          console.log('Sportler erfolgreich gelöscht');
-          this.loadData();
-        },
-        error: (error) => {
-          console.error('Fehler beim Löschen des Sportlers', error);
-        },
-      });
-    }
-  });
-}
-
-
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.sportlerService.deleteSportler(sportler.id).subscribe({
+          next: () => {
+            console.log('Sportler erfolgreich gelöscht');
+            this.loadData();
+          },
+          error: (error) => {
+            console.error('Fehler beim Löschen des Sportlers', error);
+          },
+        });
+      }
+    });
+  }
 
   editSportler(sportler: Sportler): void {
     const dialogRef = this.dialog.open(EditDialogComponent, {
@@ -152,6 +151,26 @@ export class SportlerOverviewComponent implements OnInit {
           },
           (error) => {
             console.error('Fehler beim Bearbeiten des Sportlers', error);
+          }
+        );
+      }
+    });
+  }
+
+  createPerson(): void {
+    const dialogRef = this.dialog.open(CreateDialogComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.sportlerService.createSportler(result).subscribe(
+          () => {
+            console.log('Sportler created', result);
+            this.loadData(); // reload list
+          },
+          (error) => {
+            console.error('Fehler beim Erstellen des Sportlers', error);
           }
         );
       }

@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Neuen Sportler erstellen</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" mat-dialog-content>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Benutzername</mat-label>
+    <input matInput formControlName="username" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Vorname</mat-label>
+    <input matInput formControlName="firstname" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Nachname</mat-label>
+    <input matInput formControlName="lastname" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" required type="email" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Ort</mat-label>
+    <input matInput formControlName="ort" required />
+  </mat-form-field>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Abbrechen</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid">
+      Erstellen
+    </button>
+  </div>
+</form>

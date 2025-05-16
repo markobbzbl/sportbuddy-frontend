@@ -3,6 +3,17 @@
   <div class="sportler-container mat-elevation-z8">
     <div class="header-section">
       <h2>Sportler Übersicht</h2>
+      <button
+        *ngIf="isAdmin"
+        mat-fab
+        color="primary"
+        aria-label="Neuen Sportler hinzufügen"
+        (click)="createPerson()"
+        class="add-button"
+        matTooltip="Neuen Sportler hinzufügen"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
 
     <app-searchbar></app-searchbar>
@@ -17,7 +28,8 @@
             <span>{{ sportler.username }}</span>
 
             <a
-              tabindex="0" (keyup.enter)="editSportler(sportler)" 
+              tabindex="0"
+              (keyup.enter)="editSportler(sportler)"
               *ngIf="isAdmin && sportler.username !== 'admin'"
               class="edit-profile"
               (click)="editSportler(sportler)"
@@ -27,7 +39,8 @@
               <mat-icon class="edit-icon">edit</mat-icon>
             </a>
             <a
-              tabindex="0" (keyup.enter)="deleteSportler(sportler)" 
+              tabindex="0"
+              (keyup.enter)="deleteSportler(sportler)"
               *ngIf="sportler.username !== 'admin' && isAdmin === true"
               class="delete-profile"
               (click)="deleteSportler(sportler)"
