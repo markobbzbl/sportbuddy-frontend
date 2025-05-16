@@ -27,10 +27,10 @@
               <mat-icon class="edit-icon">edit</mat-icon>
             </a>
             <a
-              tabindex="0" (keyup.enter)="deleteSportler(sportler.id)" 
+              tabindex="0" (keyup.enter)="deleteSportler(sportler)" 
               *ngIf="sportler.username !== 'admin' && isAdmin === true"
               class="delete-profile"
-              (click)="deleteSportler(sportler.id)"
+              (click)="deleteSportler(sportler)"
               matTooltip="Sportler löschen"
               aria-label="Sportler löschen"
             >

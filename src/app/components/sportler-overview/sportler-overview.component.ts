@@ -114,19 +114,28 @@ export class SportlerOverviewComponent implements OnInit {
     this.dataSource!.filter = filterValue.trim().toLowerCase();
   }
 
-  deleteSportler(id: number): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      width: '350px',
-      data: { message: 'Möchtest du diesen Sportler wirklich löschen?' },
-    });
+ deleteSportler(sportler: Sportler): void {
+  const dialogRef = this.dialog.open(DeleteDialogComponent, {
+    width: '350px',
+    data: { message: 'Möchtest du diesen Sportler wirklich löschen?' },
+  });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.sportlerService.deleteSportler(id);
-        console.log(`Deleting sportler with ID: ${id}`);
-      }
-    });
-  }
+  dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+    if (confirmed) {
+      this.sportlerService.deleteSportler(sportler.id).subscribe({
+        next: () => {
+          console.log('Sportler erfolgreich gelöscht');
+          this.loadData();
+        },
+        error: (error) => {
+          console.error('Fehler beim Löschen des Sportlers', error);
+        },
+      });
+    }
+  });
+}
+
+
 
   editSportler(sportler: Sportler): void {
     const dialogRef = this.dialog.open(EditDialogComponent, {

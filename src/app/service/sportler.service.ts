@@ -35,13 +35,12 @@ export class SportlerService {
   return this.http.put(`${this.apiUrl}/${sportler.id}`, sportler);
 }
 
-  deleteSportler(id: number): Observable<any> {
-    const headers = this.getAuthHeaders();
-    const sportlerId = id;
-    const url = `${this.apiUrl}/${sportlerId}`;
-    console.log(url)
-    return this.http.delete(url, { headers });
-  }
+ deleteSportler(id: number): Observable<string> {
+  return this.http.delete(`${this.apiUrl}/${id}`, {
+    responseType: 'text'
+  });
+}
+
 
   getSportlerByUsername(username: string): Observable<Sportler | null> {
     const headers = this.getAuthHeaders();
