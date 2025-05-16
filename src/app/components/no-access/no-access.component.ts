@@ -5,7 +5,7 @@ import { MatIcon } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { AppLoginComponent } from '../app-login/app-login.component';
 import { HeaderService } from '../../service/header.service';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-no-access',

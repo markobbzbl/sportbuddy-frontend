@@ -6,6 +6,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { routes } from '../../app-routing.module';
+import { HttpClient } from '@angular/common/http';
+import { AuthConfig, provideOAuthClient } from 'angular-oauth2-oidc';
+import { createSpyFromClass } from 'jasmine-auto-spies';
+import { authConfig } from '../../../main';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -17,6 +21,9 @@ describe('HeaderComponent', () => {
       providers: [
         provideRouter(routes), // stellt ActivatedRoute bereit
         provideAnimations(), // für Angular Material
+        provideOAuthClient(),
+        { provide: HttpClient, useValue: createSpyFromClass(HttpClient) },
+        { provide: AuthConfig, useValue: authConfig },
       ],
     }).compileComponents();
 

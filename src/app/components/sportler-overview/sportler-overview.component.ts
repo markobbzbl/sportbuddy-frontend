@@ -40,7 +40,7 @@ import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 export class SportlerOverviewComponent implements OnInit {
   sportlerList: Sportler[] = [];
   loginForm: FormGroup;
-  errorMessage: string = '';
+  errorMessage = '';
   displayedColumns: string[] = [
     'username',
     'firstname',
@@ -49,11 +49,11 @@ export class SportlerOverviewComponent implements OnInit {
     'ort',
   ];
   dataSource = new MatTableDataSource<Sportler>();
-  i: number = 1;
+  i = 1;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   token = window.sessionStorage.getItem('access_token');
-  isAdmin: boolean = false;
+  isAdmin = false;
   constructor(
     private fb: FormBuilder,
     private sportlerService: SportlerService,

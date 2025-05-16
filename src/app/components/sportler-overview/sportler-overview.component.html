@@ -17,6 +17,7 @@
             <span>{{ sportler.username }}</span>
 
             <a
+              tabindex="0" (keyup.enter)="editSportler(sportler)" 
               *ngIf="isAdmin && sportler.username !== 'admin'"
               class="edit-profile"
               (click)="editSportler(sportler)"
@@ -26,7 +27,8 @@
               <mat-icon class="edit-icon">edit</mat-icon>
             </a>
             <a
-              *ngIf="sportler.username != 'admin' && isAdmin == true"
+              tabindex="0" (keyup.enter)="deleteSportler(sportler.id)" 
+              *ngIf="sportler.username !== 'admin' && isAdmin === true"
               class="delete-profile"
               (click)="deleteSportler(sportler.id)"
               matTooltip="Sportler löschen"

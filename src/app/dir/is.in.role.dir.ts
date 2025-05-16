@@ -11,7 +11,7 @@ export class IsInRoleDirective implements OnInit, OnDestroy {
 
   constructor(
     private viewContainerRef: ViewContainerRef,
-    private templateRef: TemplateRef<any>,
+    private templateRef: TemplateRef<unknown>,
     private authService: AppAuthService) {
   }
 

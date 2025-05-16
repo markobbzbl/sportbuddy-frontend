@@ -1,6 +1,12 @@
-import {inject} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivateChildFn, CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
-import {OAuthService} from 'angular-oauth2-oidc';
+import { inject } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateChildFn,
+  CanActivateFn,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { AppAuthService } from '../service/app.auth.service';
 
 export const appCanActivate: CanActivateFn = (
@@ -14,7 +20,7 @@ export const appCanActivate: CanActivateFn = (
 
   let userRoles: string[] = [];
 
-  authService.getRoles().subscribe(roles => {
+  authService.getRoles().subscribe((roles) => {
     userRoles = roles;
   });
 
@@ -28,8 +34,11 @@ export const appCanActivate: CanActivateFn = (
   return router.parseUrl('/noaccess');
 };
 
-function checkRoles(route: ActivatedRouteSnapshot, userRoles: string[]): boolean {
-  const roles = route.data['roles'] as Array<string>;
+function checkRoles(
+  route: ActivatedRouteSnapshot,
+  userRoles: string[]
+): boolean {
+  const roles = route.data['roles'] as string[];
 
   if (roles === undefined || roles === null || roles.length === 0) {
     return true;
@@ -47,4 +56,7 @@ function checkRoles(route: ActivatedRouteSnapshot, userRoles: string[]): boolean
   return false;
 }
 
-export const appCanActivateChild: CanActivateChildFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => appCanActivate(route, state);
+export const appCanActivateChild: CanActivateChildFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => appCanActivate(route, state);

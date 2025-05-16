@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,8 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Router, RouterModule } from '@angular/router';
-import { SportlerService } from '../../service/sportler.service';
+import { RouterModule } from '@angular/router';
 import { Sportler } from '../../model/sportler.model';
 
 @Component({
@@ -31,10 +30,10 @@ import { Sportler } from '../../model/sportler.model';
   templateUrl: './searchbar.component.html',
   styleUrl: './searchbar.component.scss',
 })
-export class SearchbarComponent {
+export class SearchbarComponent implements OnInit {
   sportlerList: Sportler[] = [];
   loginForm: FormGroup;
-  errorMessage: string = '';
+  errorMessage = '';
   displayedColumns: string[] = [
     'username',
     'firstname',
@@ -49,10 +48,7 @@ export class SearchbarComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private router: Router,
-    private fb: FormBuilder,
-    private sportlerService: SportlerService
-  ) {
+    private fb: FormBuilder  ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', Validators.required],
@@ -60,7 +56,7 @@ export class SearchbarComponent {
   }
 
   ngOnInit(): void {
-
+    throw new Error("Error thrown, not implemented yet")
   }
 
   applyFilter(event: Event) {

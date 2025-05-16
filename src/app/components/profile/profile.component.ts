@@ -8,6 +8,7 @@ import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-profile',
+  standalone: true,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
   imports: [

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -6,7 +5,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class CookieService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private router: Router) {}
 
   getCookie() {
     const token = window.sessionStorage.getItem('access_token');
@@ -34,7 +33,7 @@ export class CookieService {
       console.log(payload.preferred_username);
       return payload.preferred_username ?? null;
     } catch (e) {
-      return null;
+      return e;
     }
   }
 }
