@@ -12,14 +12,19 @@ export const routes: Routes = [
     path: '',
     component: SportlerOverviewComponent,
     pathMatch: 'full',
+    
   },
   {
     path: 'overview',
     component: SportlerOverviewComponent,
+    canActivate: [appCanActivate],
+    data: { roles: [AppRoles.Read] },
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [appCanActivate],
+    data: { roles: [AppRoles.Read] },
   },
   {
     path: 'contact',

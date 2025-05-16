@@ -34,6 +34,7 @@ import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
     HeaderComponent,
     MatTooltip,
   ],
+
   templateUrl: './sportler-overview.component.html',
   styleUrl: './sportler-overview.component.scss',
 })
@@ -60,30 +61,28 @@ export class SportlerOverviewComponent implements OnInit {
     private dialog: MatDialog,
     private authService: AppAuthService,
     private cd: ChangeDetectorRef
-
-  ) { 
+  ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', Validators.required],
     });
-       
   }
   ngOnInit(): void {
-     this.authService.accessTokenObservable.subscribe(token => {
-    if (token) {
-      this.token = token;
+    this.authService.accessTokenObservable.subscribe((token) => {
+      if (token) {
+        this.token = token;
 
-      this.authService.getRoles().subscribe((roles: string[]) => {
-        this.isAdmin = roles.includes('admin');
+        this.authService.getRoles().subscribe((roles: string[]) => {
+          this.isAdmin = roles.includes('admin');
 
-        // Now load data after roles and isAdmin is set
-        this.loadData();
+          // Now load data after roles and isAdmin is set
+          this.loadData();
 
-        // Manually trigger change detection to update the view
-        this.cd.detectChanges();
-      });
-    }
-  });
+          // Manually trigger change detection to update the view
+          this.cd.detectChanges();
+        });
+      }
+    });
   }
 
   loadData() {
@@ -130,23 +129,23 @@ export class SportlerOverviewComponent implements OnInit {
   }
 
   editSportler(sportler: Sportler): void {
-  const dialogRef = this.dialog.open(EditDialogComponent, {
-    width: '400px',
-    data: sportler
-  });
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      width: '400px',
+      data: sportler,
+    });
 
-  dialogRef.afterClosed().subscribe((result: Sportler | undefined) => {
-    if (result) {
-      this.sportlerService.updateSportler(result).subscribe(
-        () => {
-          console.log('Sportler updated', result);
-          this.loadData(); // reload list
-        },
-        (error) => {
-          console.error('Fehler beim Bearbeiten des Sportlers', error);
-        }
-      );
-    }
-  });
-}
+    dialogRef.afterClosed().subscribe((result: Sportler | undefined) => {
+      if (result) {
+        this.sportlerService.updateSportler(result).subscribe(
+          () => {
+            console.log('Sportler updated', result);
+            this.loadData(); // reload list
+          },
+          (error) => {
+            console.error('Fehler beim Bearbeiten des Sportlers', error);
+          }
+        );
+      }
+    });
+  }
 }

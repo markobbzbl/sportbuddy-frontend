@@ -8,3 +8,7 @@
 <button routerLink="/overview"  *ngIf="oauthService.hasValidAccessToken()">
 <p> GO BACK </p>
 </button>
+
+<button (click)="login()" *ngIf="oauthService.hasValidAccessToken()">
+<p> LOGIN WITH VALID USER </p>
+</button>
