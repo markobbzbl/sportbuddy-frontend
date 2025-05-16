@@ -1,11 +1,34 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {AuthConfig, OAuthModule} from 'angular-oauth2-oidc';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpLoaderFactory } from '../main';
+import { authConfig } from './config/auth.config';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
-    }).compileComponents();
+    imports: [
+        OAuthModule.forRoot({ resourceServer: { sendAccessToken: true } }),
+        AppRoutingModule,
+        MatMomentDateModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }), AppComponent,
+      ],
+    providers: [
+        { provide: AuthConfig, useValue: authConfig },
+        provideHttpClient(withInterceptorsFromDi())
+    ],
+    teardown: {destroyAfterEach: true}
+}).compileComponents();
   });
 
   it('should create the app', () => {
@@ -13,17 +36,6 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
-
-  it(`should have the 'sportbuddy-frontend' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('sportbuddy-frontend');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, sportbuddy-frontend');
-  });
 });
+
+

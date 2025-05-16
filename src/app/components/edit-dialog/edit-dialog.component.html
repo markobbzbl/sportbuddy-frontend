@@ -1,0 +1,42 @@
+<h2 mat-dialog-title class="dialog-title">Sportler bearbeiten</h2>
+
+<mat-dialog-content [formGroup]="editForm" class="dialog-content">
+  <div class="form-grid">
+    <mat-form-field appearance="outline">
+      <mat-label>Vorname</mat-label>
+      <input matInput formControlName="firstname" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nachname</mat-label>
+      <input matInput formControlName="lastname" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Ort</mat-label>
+      <input matInput formControlName="ort" />
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-stroked-button color="warn" (click)="onCancel()">
+    <mat-icon>close</mat-icon>
+    Abbrechen
+  </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="editForm.invalid"
+    (click)="onSave()"
+  >
+    <mat-icon>save</mat-icon>
+    Speichern
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,22 @@
+
+.logout-profile {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 12px;
+}
+
+.logout-icon {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+a {
+  color: white;
+  font-style: none;
+}
+
+.logout-profile:hover {
+  cursor: pointer;
+
+}

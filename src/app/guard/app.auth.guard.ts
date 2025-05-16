@@ -1,7 +1,7 @@
 import {inject} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivateChildFn, CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
 import {OAuthService} from 'angular-oauth2-oidc';
-import { AppAuthService } from '../../service/app.auth.service';
+import { AppAuthService } from '../service/app.auth.service';
 
 export const appCanActivate: CanActivateFn = (
   route: ActivatedRouteSnapshot,

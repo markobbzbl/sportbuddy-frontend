@@ -1,0 +1,15 @@
+<div class="confirm-dialog-container">
+  <div class="dialog-title-with-icon">
+    <mat-icon class="warning-icon" color="warn">warning</mat-icon>
+    <h2 class="dialog-title">Bestätigung</h2>
+  </div>
+
+  <mat-dialog-content class="dialog-content">
+    <span>{{ data.message }}</span>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-stroked-button color="primary" (click)="onCancel()">Abbrechen</button>
+    <button mat-raised-button color="warn" (click)="onConfirm()">Löschen</button>
+  </mat-dialog-actions>
+</div>

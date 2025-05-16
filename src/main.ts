@@ -16,7 +16,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { AppComponent } from './app/app.component';
 import { HttpXSRFInterceptor } from './app/interceptor/http.csfr.interceptor';
-import { AppAuthService } from './service/app.auth.service';
+import { AppAuthService } from './app/service/app.auth.service';
 import { AppRoutingModule } from './app/app-routing.module';
 
 if (environment.production) {
@@ -24,11 +24,11 @@ if (environment.production) {
 }
 
 export const authConfig: AuthConfig = {
-  issuer: 'http://localhost:8080/realms/ILV',
+  issuer: 'http://localhost:8080/realms/sportbuddy',
   requireHttps: false,
   redirectUri: environment.frontendBaseUrl,
   postLogoutRedirectUri: environment.frontendBaseUrl,
-  clientId: 'demoapp',
+  clientId: 'sportbuddy',
   scope: 'openid profile roles offline_access',
   responseType: 'code',
   showDebugInformation: true,

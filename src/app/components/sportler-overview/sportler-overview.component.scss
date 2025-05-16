@@ -1,0 +1,180 @@
+.sportler-container {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  font-family: 'Roboto', sans-serif;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+h2 {
+  color: #3f51b5;
+  font-size: 2rem;
+  margin: 0;
+}
+
+button[mat-raised-button] {
+  font-weight: 500;
+  border-radius: 8px;
+  text-transform: none;
+}
+
+.filter-input {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+.mat-table {
+  width: 100%;
+  min-width: 600px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.mat-header-cell {
+  font-weight: 600;
+  color: #555;
+  background-color: #f4f6f8;
+  padding: 16px;
+}
+
+.mat-cell {
+  padding: 14px 16px;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.mat-row:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.2s ease;
+}
+
+.mat-paginator {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .header-section {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    padding: 12px 8px;
+    font-size: 0.85rem;
+  }
+
+  .mat-table {
+    min-width: 320px; /* Allow table to fit better on small screens */
+  }
+
+  .filter-input {
+    margin-bottom: 16px; /* Reduce bottom margin for smaller screens */
+  }
+
+  .sportler-container {
+    padding: 16px; /* Less padding for smaller screens */
+  }
+
+  mat-icon {
+    font-size: 2rem; /* Make icon a bit smaller for smaller screens */
+  }
+
+  mat-icon:hover{
+    cursor: pointer;
+  }
+  
+  mat-paginator {
+    margin-top: 20px; /* Adjust pagination margin */
+  }
+  
+  .mat-header-cell {
+    font-size: 0.9rem; /* Adjust header font size for better readability */
+  }
+}
+
+@media (max-width: 480px) {
+  .sportler-container {
+    padding: 12px; /* Further reduce padding for very small screens */
+  }
+
+  h2 {
+    font-size: 1.4rem; /* Further reduce font size */
+  }
+
+  mat-icon {
+    font-size: 1.5rem; /* Make icon even smaller */
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    font-size: 0.8rem; /* Smaller font size for cells */
+    padding: 8px 6px; /* Less padding for better fit */
+  }
+}
+
+
+
+
+.username-cell {
+  white-space: nowrap;
+}
+
+.username-cell span {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.delete-profile {
+  display: inline-block;
+  vertical-align: middle;
+  color: #f44336;
+  cursor: pointer;
+}
+
+.delete-icon {
+  font-size: 20px;
+  vertical-align: middle;
+  transition: color 0.2s ease;
+}
+
+.delete-icon:hover {
+  color: #d32f2f;
+}
+
+.edit-icon {
+  font-size: 20px;
+  vertical-align: middle;
+  transition: color 0.2s ease;
+}
+
+.edit-icon:hover {
+  color: #d32f2f;
+}
+

@@ -1,0 +1,10 @@
+<mat-icon color="warn" style="font-size: 200px">warning_amber</mat-icon>
+<p style="color: red; font-weight: 800; font-size: 40px;">NO ACCESS</p>
+<p>YOU DONT HAVE THE REQUIRED ROLE FOR THIS PAGE</p>
+<button *ngIf="!oauthService.hasValidAccessToken()">
+  <app-login> </app-login>
+</button>
+
+<button routerLink="/overview"  *ngIf="oauthService.hasValidAccessToken()">
+<p> GO BACK </p>
+</button>
