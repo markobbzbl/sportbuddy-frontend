@@ -19,7 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { AppAuthService } from '../../service/app.auth.service';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { CreateDialogComponent } from '../../create-dialog/create-dialog.component';
+import { CreateDialogComponent } from '../create-dialog/create-dialog.component';
 @Component({
   selector: 'app-sportler-overview',
   imports: [
